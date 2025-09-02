@@ -50,7 +50,7 @@ trap cleanup SIGTERM SIGINT
 
 # Function to check if Docker is ready
 check_docker() {
-    docker version >/dev/null 2>&1
+    /usr/local/bin/docker version
 }
 
 # Wait for Docker to be ready
@@ -83,7 +83,7 @@ fi
 
 # Start Milvus services
 echo "$(date): Starting Milvus services..."
-if docker-compose up -d; then
+if /usr/local/bin/docker-compose up -d; then
     echo "$(date): Milvus services started successfully"
     
     # Keep the script running to handle shutdown signals
@@ -93,7 +93,7 @@ if docker-compose up -d; then
     while true; do
         sleep 30
         # Optional: Check if containers are still running
-        if ! docker-compose ps --services --filter "status=running" | grep -q .; then
+        if ! /usr/local/bin/docker-compose ps --services --filter "status=running" | grep -q .; then
             echo "$(date): Warning: Some Milvus services may have stopped unexpectedly"
         fi
     done

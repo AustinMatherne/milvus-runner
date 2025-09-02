@@ -29,7 +29,7 @@ fi
 
 # Stop Milvus services
 echo "$(date): Stopping Milvus services..."
-if docker-compose down; then
+if /usr/local/bin/docker-compose down; then
     echo "$(date): Milvus services stopped successfully"
     exit 0
 else
